@@ -28,8 +28,9 @@ for song_splits in os.listdir(splits_folder_path):
             os.makedirs(path, exist_ok = True)
 
             for tempo in tempo_var:
-
-                output_file = f"generated/song_{song_number}/segment_{segment_number}/sample_{variation}.mp3"
+                if (pitch == 0 and tempo == 1):
+                    continue
+                output_file = f"generated/song_{song_number}/segment_{segment_number}/song_{song_number}_segment_{segment_number}_sample_{variation}.mp3"
                 subprocess.run(["rm", "./generated/temp.mp3"])
                 command = ["ffmpeg", "-i", input_file, "-filter:a", f"atempo={tempo}", temp]
                 subprocess.run(command, check = True)
